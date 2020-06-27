@@ -1,23 +1,25 @@
-﻿using System;
+﻿using Company.OrderProcessing.Models.Outputs;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace Company.OrderProcessing.Models
+namespace Company.OrderProcessing.Models.AbstractClasses
 {
-    public class PhysicalProduct
+    public abstract class Product
     {
         public string Description { get; set; }
 
         public List<PackingSlip> Outputs { get; set; }
 
-        public PhysicalProduct(string description)
+        internal Product(string description)
         {
-            this.Description = description;
+            Description = description;
         }
 
-        public int ProcessOutput()
+        public virtual int ProcessOutputs()
         {
             int result = 0;
-            foreach(PackingSlip output in Outputs)
+            foreach (PackingSlip output in Outputs)
             {
                 Console.WriteLine("Sending " + output.Description + " for " + Description);
                 result += output.SendToTarget();
