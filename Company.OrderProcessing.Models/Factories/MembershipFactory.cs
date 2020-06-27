@@ -19,7 +19,7 @@ namespace Company.OrderProcessing.Models.Factories
 
             Product membership = new Membership(description);
 
-            membership.Outputs = new List<PackingSlip>();
+            membership.Outputs = new List<Output>();
             membership.Outputs.Add(new PackingSlip("Membership Change", membership, userServiceAgent));
             membership.Outputs.Add(new PackingSlip("Membership Change", membership, emailClient));
 

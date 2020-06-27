@@ -22,7 +22,7 @@ namespace Company.OrderProcessing.Client
 
             ProductFactory productFactory = new PhysicalProductFactory();
             Product book = productFactory.Create("Fiction Novel");
-            book.Outputs = new List<PackingSlip>();
+            book.Outputs = new List<Output>();
             book.Outputs.Add(new PackingSlip("Original Packing Slip", book, shippingClient));
             book.Outputs.Add(new PackingSlip("Duplicate Packing Slip", book, royaltyClient));
 

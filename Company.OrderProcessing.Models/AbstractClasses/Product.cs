@@ -9,7 +9,7 @@ namespace Company.OrderProcessing.Models.AbstractClasses
     {
         public string Description { get; set; }
 
-        public List<PackingSlip> Outputs { get; set; }
+        public List<Output> Outputs { get; set; }
 
         internal Product(string description)
         {

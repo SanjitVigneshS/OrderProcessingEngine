@@ -17,8 +17,8 @@ namespace Company.OrderProcessing.Models.Factories
 
             Product video = new Video(description);
 
-            video.Outputs = new List<PackingSlip>();
-            video.Outputs.Add(new PackingSlip("Original Packing Slip", video, client));
+            video.Outputs = new List<Output>();
+            video.Outputs.Add(new VideoPackingSlip("Original Packing Slip", video, client));
 
             return video;
         }

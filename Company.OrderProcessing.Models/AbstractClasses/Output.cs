@@ -5,6 +5,12 @@ using System.Text;
 
 namespace Company.OrderProcessing.Models.AbstractClasses
 {
+    /// <summary>
+    /// This class will be the base class for any rules like
+    /// addition of discounts, freebies etc. It can also be
+    /// used to manipulate what would be the target system
+    /// that would get invoked.
+    /// </summary>
     public abstract class Output
     {
         public string Description { get; set; }
@@ -20,12 +26,6 @@ namespace Company.OrderProcessing.Models.AbstractClasses
         public virtual int SendToTarget()
         {
             Console.WriteLine("Processing " + Products[0].Description + " for " + Target.Description);
-            if(Products[0].Description == "Learning To Ski")
-            {
-                ProductFactory productFactory = new VideoFactory();
-                Product video = productFactory.Create("First Aid");
-                Products.Add(video);
-            }
             return Target.Send(this);
         }
     }

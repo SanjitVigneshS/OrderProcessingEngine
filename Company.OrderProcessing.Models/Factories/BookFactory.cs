@@ -21,7 +21,7 @@ namespace Company.OrderProcessing.Models.Factories
 
             Product book = new Book(description);
 
-            book.Outputs = new List<PackingSlip>();
+            book.Outputs = new List<Output>();
             book.Outputs.Add(new PackingSlip("Original Packing Slip", book, shippingClient));
             book.Outputs.Add(new PackingSlip("Duplicate Packing Slip", book, royaltyClient));
             book.Outputs.Add(new PackingSlip("Commission Payment", book, paymentClient));
