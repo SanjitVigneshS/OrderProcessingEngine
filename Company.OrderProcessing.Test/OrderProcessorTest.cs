@@ -6,6 +6,7 @@ using Company.OrderProcessing.Models.Outputs;
 using Company.OrderProcessing.Models.Products;
 using Company.OrderProcessing.Models.Targets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace Company.OrderProcessing.Test
@@ -84,6 +85,41 @@ namespace Company.OrderProcessing.Test
             membership.Outputs.Add(new PackingSlip("Upgrade Membership", membership, emailClient));
 
             Assert.IsFalse(orderProcessor.ProcessOrder(membership) < 0);
+        }
+
+        [TestMethod]
+        public void TestSkiVideoProduct()
+        {
+            Target client = new ShippingClient("Shipping");
+            client.Link = "Link to Shipping Service";
+
+            ProductFactory productFactory = new VideoFactory();
+            Product video = productFactory.Create("Learning To Ski");
+            video.Outputs = new List<PackingSlip>();
+            video.Outputs.Add(new PackingSlip("Original Packing Slip", video, client));
+
+            Assert.IsFalse(orderProcessor.ProcessOrder(video) < 0);
+        }
+
+        [TestMethod]
+        public void TestOtherVideoProduct()
+        {
+            Target client = new ShippingClient("Shipping");
+            client.Link = "Link to Shipping Service";
+
+            ProductFactory productFactory = new VideoFactory();
+            Product video = productFactory.Create("Movie");
+            video.Outputs = new List<PackingSlip>();
+            video.Outputs.Add(new PackingSlip("Original Packing Slip", video, client));
+
+            Assert.IsFalse(orderProcessor.ProcessOrder(video) < 0);
+        }
+
+        [TestCleanup]
+        public void CleanUp()
+        {
+            orderProcessor = null;
+            Console.WriteLine();
         }
     }
 }

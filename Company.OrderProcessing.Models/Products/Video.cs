@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Company.OrderProcessing.Models.Products
 {
-    public class Membership : Product
+    public class Video : Product
     {
-        internal Membership(string description) : base(description)
+        internal Video(string description) : base(description)
         {
         }
 

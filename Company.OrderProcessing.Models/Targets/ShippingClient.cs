@@ -14,7 +14,10 @@ namespace Company.OrderProcessing.Models.Targets
         public override int Send(Output slip)
         {
             Console.WriteLine(slip.Description + " sent to " + Link);
-            Console.WriteLine("Product: " + slip.Product.Description);
+            foreach(Product product in slip.Products)
+            {
+                Console.WriteLine("Product: " + product.Description);
+            }
             return 0;
         }
     }

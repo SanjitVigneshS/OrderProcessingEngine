@@ -17,7 +17,7 @@ namespace Company.OrderProcessing.Models.Targets
             Console.WriteLine("POST to user service " + Link);
             MembershipChangeMessageBody body = new MembershipChangeMessageBody();
             body.UserId = userId;
-            body.NewMembership = output.Product.Description;
+            body.NewMembership = output.Products[0].Description;
             Console.WriteLine("POST Body: " + JsonConvert.SerializeObject(body));
             return 0;
         }
