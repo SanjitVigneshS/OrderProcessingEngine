@@ -28,7 +28,8 @@ namespace Company.OrderProcessing.Test
             ProductFactory productFactory = new PhysicalProductFactory();
             Product physicalProduct = productFactory.Create("Table");
 
-            Assert.IsFalse(orderProcessor.ProcessOrder(physicalProduct) < 0);
+            //Assert the number of process outputs.
+            Assert.AreEqual(2, orderProcessor.ProcessOrder(physicalProduct));
         }
 
         [TestMethod]
@@ -37,7 +38,7 @@ namespace Company.OrderProcessing.Test
             ProductFactory productFactory = new BookFactory();
             Product book = productFactory.Create("Fiction Novel");
 
-            Assert.IsFalse(orderProcessor.ProcessOrder(book) < 0);
+            Assert.AreEqual(3, orderProcessor.ProcessOrder(book));
         }
 
         [TestMethod]
@@ -46,7 +47,7 @@ namespace Company.OrderProcessing.Test
             ProductFactory productFactory = new MembershipFactory();
             Product membership = productFactory.Create("New Membership");
 
-            Assert.IsFalse(orderProcessor.ProcessOrder(membership) < 0);
+            Assert.AreEqual(2, orderProcessor.ProcessOrder(membership));
         }
 
         [TestMethod]
@@ -55,7 +56,7 @@ namespace Company.OrderProcessing.Test
             ProductFactory productFactory = new MembershipFactory();
             Product membership = productFactory.Create("Upgrade Membership");
 
-            Assert.IsFalse(orderProcessor.ProcessOrder(membership) < 0);
+            Assert.AreEqual(2, orderProcessor.ProcessOrder(membership));
         }
 
         [TestMethod]
@@ -64,7 +65,10 @@ namespace Company.OrderProcessing.Test
             ProductFactory productFactory = new VideoFactory();
             Product video = productFactory.Create("Learning To Ski");
 
-            Assert.IsFalse(orderProcessor.ProcessOrder(video) < 0);
+            Assert.AreEqual(1, orderProcessor.ProcessOrder(video));
+
+            //Also assert if free video was added.
+            Assert.AreEqual(2, video.Outputs[0].Products.Count);
         }
 
         [TestMethod]
@@ -73,7 +77,9 @@ namespace Company.OrderProcessing.Test
             ProductFactory productFactory = new VideoFactory();
             Product video = productFactory.Create("Movie");
 
-            Assert.IsFalse(orderProcessor.ProcessOrder(video) < 0);
+            Assert.AreEqual(1, orderProcessor.ProcessOrder(video));
+            //Free video should not be added.
+            Assert.AreEqual(1, video.Outputs[0].Products.Count);
         }
 
         [TestCleanup]

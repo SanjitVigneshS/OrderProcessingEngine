@@ -5,14 +5,15 @@ using System.Text;
 
 namespace Company.OrderProcessing.Models.Targets
 {
-    public class EmailClient : Target
+    public class PaymentServiceAgent : Target
     {
-        public EmailClient(string description) : base(description)
+        public PaymentServiceAgent(string description) : base(description)
         {
         }
-        public override int Send(Output email)
+
+        public override int Send(Output output)
         {
-            Console.WriteLine(email.Description + " notification sent to email " + Link);
+            Console.WriteLine("Sent payment details to " + Link);
             return 1;
         }
     }

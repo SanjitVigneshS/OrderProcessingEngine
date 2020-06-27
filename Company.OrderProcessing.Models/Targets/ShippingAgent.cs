@@ -18,7 +18,7 @@ namespace Company.OrderProcessing.Models.Targets
             {
                 Console.WriteLine("Product: " + product.Description);
             }
-            return 0;
+            return 1;
         }
     }
 }

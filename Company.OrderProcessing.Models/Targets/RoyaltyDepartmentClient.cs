@@ -14,8 +14,7 @@ namespace Company.OrderProcessing.Models.Targets
         public override int Send(Output slip)
         {
             Console.WriteLine(slip.Description + " sent to " + Link);
-            //Console.WriteLine("Product: " + slip.Product.Description);
-            return 0;
+            return 1;
         }
     }
 }

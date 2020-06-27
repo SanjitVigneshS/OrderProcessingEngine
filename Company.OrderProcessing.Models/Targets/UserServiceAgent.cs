@@ -19,7 +19,7 @@ namespace Company.OrderProcessing.Models.Targets
             body.UserId = userId;
             body.NewMembership = output.Products[0].Description;
             Console.WriteLine("POST Body: " + JsonConvert.SerializeObject(body));
-            return 0;
+            return 1;
         }
     }
 
