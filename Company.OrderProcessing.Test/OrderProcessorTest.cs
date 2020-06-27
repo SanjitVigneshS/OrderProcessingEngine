@@ -24,7 +24,7 @@ namespace Company.OrderProcessing.Test
         [TestMethod]
         public void TestPhysicalProduct()
         {
-            ShippingClient client = new ShippingClient("Shipping");
+            Target client = new ShippingClient("Shipping");
             client.Link = "Link to Shipping Service";
 
             ProductFactory productFactory = new PhysicalProductFactory();
@@ -38,18 +38,52 @@ namespace Company.OrderProcessing.Test
         [TestMethod]
         public void TestBookProduct()
         {
-            ShippingClient shippingClient = new ShippingClient("Shipping");
+            Target shippingClient = new ShippingClient("Shipping");
             shippingClient.Link = "Link to Shipping Service";
-            RoyaltyDepartmentClient royaltyClient = new RoyaltyDepartmentClient("Royalty Department");
+            Target royaltyClient = new RoyaltyDepartmentClient("Royalty Department");
             royaltyClient.Link = "Link to Royalty Department Service";
 
-            ProductFactory productFactory = new PhysicalProductFactory();
+            ProductFactory productFactory = new BookFactory();
             Product book = productFactory.Create("Fiction Novel");
             book.Outputs = new List<PackingSlip>();
             book.Outputs.Add(new PackingSlip("Original Packing Slip", book, shippingClient));
             book.Outputs.Add(new PackingSlip("Duplicate Packing Slip", book, royaltyClient));
 
             Assert.IsFalse(orderProcessor.ProcessOrder(book) < 0);
+        }
+
+        [TestMethod]
+        public void TestNewMembershipProduct()
+        {
+            Target userServiceAgent = new UserServiceAgent("User Agent");
+            userServiceAgent.Link = "Link to Shipping Service";
+            Target emailClient = new EmailClient("Email");
+            emailClient.Link = "Link to Royalty Department Service";
+
+            ProductFactory productFactory = new MembershipFactory();
+            Product membership = productFactory.Create("Fiction Novel");
+            membership.Outputs = new List<PackingSlip>();
+            membership.Outputs.Add(new PackingSlip("New Membership", membership, userServiceAgent));
+            membership.Outputs.Add(new PackingSlip("New Membership", membership, emailClient));
+
+            Assert.IsFalse(orderProcessor.ProcessOrder(membership) < 0);
+        }
+
+        [TestMethod]
+        public void TestMembershipUpgradeProduct()
+        {
+            Target userServiceAgent = new UserServiceAgent("User Agent");
+            userServiceAgent.Link = "Link to Shipping Service";
+            Target emailClient = new EmailClient("Email");
+            emailClient.Link = "Link to Royalty Department Service";
+
+            ProductFactory productFactory = new MembershipFactory();
+            Product membership = productFactory.Create("Fiction Novel");
+            membership.Outputs = new List<PackingSlip>();
+            membership.Outputs.Add(new PackingSlip("Upgrade Membership", membership, userServiceAgent));
+            membership.Outputs.Add(new PackingSlip("Upgrade Membership", membership, emailClient));
+
+            Assert.IsFalse(orderProcessor.ProcessOrder(membership) < 0);
         }
     }
 }
