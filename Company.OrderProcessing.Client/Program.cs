@@ -15,7 +15,7 @@ namespace Company.OrderProcessing.Client
         {
             OrderProcessor orderProcessor = new OrderProcessor();
 
-            ShippingClient shippingClient = new ShippingClient("Shipping");
+            ShippingAgent shippingClient = new ShippingAgent("Shipping");
             shippingClient.Link = "Link to Shipping Service";
             RoyaltyDepartmentClient royaltyClient = new RoyaltyDepartmentClient("Royalty Department");
             royaltyClient.Link = "Link to Royalty Department Service";

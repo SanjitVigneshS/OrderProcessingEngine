@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Company.OrderProcessing.Models.Targets
 {
-    public class ShippingClient: Target
+    public class ShippingAgent: Target
     {
-        public ShippingClient(string description): base(description)
+        public ShippingAgent(string description): base(description)
         {
         }
         public override int Send(Output slip)
